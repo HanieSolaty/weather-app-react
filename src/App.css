@@ -1,0 +1,103 @@
+body {
+  font-family: "Kalam", cursive;
+  font-family: "Source Sans Pro", sans-serif;
+  box-sizing: border-box;
+  background: linear-gradient(
+    65deg,
+    #1812c2,
+    #3f3ad9,
+    #1267c2,
+    #129cc2,
+    #07aefb,
+    #12cffa,
+    #01d8e4,
+    #12cffa,
+    #07aefb,
+    #129cc2,
+    #1267c2,
+    #3f3ad9,
+    #1812c2
+  );
+  background-repeat: no-repeat;
+}
+
+.container {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.App {
+  max-width: 700px;
+  margin: 200px auto;
+}
+
+.btn:hover {
+  color: #0b5ed7;
+  background-color: #fff;
+  font-weight: bold;
+  border: 1px solid #0b5ed7;
+}
+
+#city {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+#description {
+  text-transform: capitalize;
+}
+
+.weather-param {
+  color: #0b5ed7;
+}
+
+.main-temp-icon {
+  filter: brightness(0) saturate(100%) invert(65%) sepia(15%) saturate(4954%)
+    hue-rotate(192deg) brightness(107%) contrast(89%);
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+}
+
+.forecast-temp-icon {
+  filter: brightness(0) saturate(100%) invert(65%) sepia(15%) saturate(4954%)
+    hue-rotate(192deg) brightness(107%) contrast(89%);
+  display: inline-block;
+  width: 40px;
+  height: 60px;
+}
+
+.main-temp-text {
+  display: inline-block;
+  font-size: 3.4rem;
+  font-weight: 600;
+  padding-left: 5px;
+}
+
+.temp-unit {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.forecast-day {
+  background-color: #ecfdfe;
+  border: 2px solid #fff;
+  border-radius: 3px;
+}
+
+.tab {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.min {
+  color: rgba(0, 0, 0, 0.533);
+}
+
+.github {
+  text-decoration: none;
+}
+
+.github-link {
+  font-size: 15px;
+}
