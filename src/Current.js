@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Convert from "./Convert";
 
 export default function Current(props) {
   let [cityVal, setCityVal] = useState(null);
@@ -64,10 +65,7 @@ export default function Current(props) {
           src={iconCodeVal}
           alt="weather icon"
         />
-        <h1 className="main-temp-text">
-          <span id="temp">{tempVal}</span>
-          <sup className="temp-unit">°C</sup>
-        </h1>
+        <Convert tempValue={tempVal} />
       </div>
     </div>
   );
