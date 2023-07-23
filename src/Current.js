@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Convert from "./Convert";
+import Icon from "./Icon";
 
 export default function Current(props) {
   let [cityVal, setCityVal] = useState(null);
@@ -59,12 +60,7 @@ export default function Current(props) {
         </div>
       </div>
       <div className="offset-2 col-4 align-self-center pt-2">
-        <img
-          id="temp-icon"
-          className="main-temp-icon"
-          src={iconCodeVal}
-          alt="weather icon"
-        />
+        <Icon iconCode={iconCodeVal} className="main-temp-icon" />
         <Convert tempValue={tempVal} />
       </div>
     </div>

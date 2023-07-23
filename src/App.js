@@ -20,7 +20,8 @@ export default function App() {
         humidity: Math.round(response.data.main.humidity),
         wind: Math.round(response.data.wind.speed),
         temp: Math.round(response.data.main.temp),
-        iconCode: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+        /*         iconCode: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+         */ iconCode: response.data.weather[0].icon,
         dateStr: <DateFunc dateVal={response.data.dt} />,
       });
     });
