@@ -101,3 +101,9 @@ body {
 .github-link {
   font-size: 15px;
 }
+
+#three-dot-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

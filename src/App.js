@@ -5,13 +5,15 @@ import Current from "./Current";
 import Github from "./Github";
 import axios from "axios";
 import DateFunc from "./Date";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function App() {
-  let [weatherData, setWeatherData] = useState({});
+  let [weatherData, setWeatherData] = useState({ ready: false });
 
   const setTheUrl = (address) => {
     axios.get(address).then(function (response) {
       setWeatherData({
+        ready: true,
         url: address,
         city: response.data.name,
         description: response.data.weather[0].description,
@@ -23,24 +25,47 @@ export default function App() {
       });
     });
   };
-
-  return (
-    <div className="App mt-5">
-      <div className="container p-4 mb-0">
-        <Search setTheUrl={setTheUrl} />
-        <hr />
-        <Current
-          urlAttr={weatherData.url}
-          cityAttr={weatherData.city}
-          descriptionAttr={weatherData.description}
-          humidityAttr={weatherData.humidity}
-          windAttr={weatherData.wind}
-          tempAttr={weatherData.temp}
-          iconCodeAttr={weatherData.iconCode}
-          dateStrAttr={weatherData.dateStr}
-        />
-        <Github />
-      </div>{" "}
-    </div>
-  );
+  if (weatherData.ready) {
+    return (
+      <div className="App mt-5">
+        <div className="container p-4 mb-0">
+          <Search setTheUrl={setTheUrl} />
+          <hr />
+          <Current
+            urlAttr={weatherData.url}
+            cityAttr={weatherData.city}
+            descriptionAttr={weatherData.description}
+            humidityAttr={weatherData.humidity}
+            windAttr={weatherData.wind}
+            tempAttr={weatherData.temp}
+            iconCodeAttr={weatherData.iconCode}
+            dateStrAttr={weatherData.dateStr}
+          />
+          <Github />
+        </div>{" "}
+      </div>
+    );
+  } else {
+    return (
+      <div className="App mt-5">
+        <div className="container p-4 mb-0">
+          <Search setTheUrl={setTheUrl} />
+          <hr />
+          <div className="container" id="three-dot-loader">
+            <ThreeDots
+              height="80"
+              width="80"
+              radius="9"
+              color="#0b5ed7"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+            />
+          </div>
+          <Github />
+        </div>{" "}
+      </div>
+    );
+  }
 }
