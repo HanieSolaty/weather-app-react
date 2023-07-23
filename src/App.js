@@ -7,27 +7,20 @@ import axios from "axios";
 import DateFunc from "./Date";
 
 export default function App() {
-  let [url, setUrl] = useState(null);
-  let [city, setCity] = useState(null);
-  let [description, setDescription] = useState(null);
-  let [humidity, setHumidity] = useState(null);
-  let [wind, setWind] = useState(null);
-  let [temp, setTemp] = useState(null);
-  let [iconCode, setIiconCode] = useState(null);
-  let [dateStr, setDateStr] = useState(null);
+  let [weatherData, setWeatherData] = useState({});
 
   const setTheUrl = (address) => {
     axios.get(address).then(function (response) {
-      setUrl(address);
-      setCity(response.data.name);
-      setDescription(response.data.weather[0].description);
-      setHumidity(Math.round(response.data.main.humidity));
-      setWind(Math.round(response.data.wind.speed));
-      setTemp(Math.round(response.data.main.temp));
-      setIiconCode(
-        `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-      );
-      setDateStr(<DateFunc dateVal={response.data.dt} />);
+      setWeatherData({
+        url: address,
+        city: response.data.name,
+        description: response.data.weather[0].description,
+        humidity: Math.round(response.data.main.humidity),
+        wind: Math.round(response.data.wind.speed),
+        temp: Math.round(response.data.main.temp),
+        iconCode: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+        dateStr: <DateFunc dateVal={response.data.dt} />,
+      });
     });
   };
 
@@ -37,14 +30,14 @@ export default function App() {
         <Search setTheUrl={setTheUrl} />
         <hr />
         <Current
-          urlAttr={url}
-          cityAttr={city}
-          descriptionAttr={description}
-          humidityAttr={humidity}
-          windAttr={wind}
-          tempAttr={temp}
-          iconCodeAttr={iconCode}
-          dateStrAttr={dateStr}
+          urlAttr={weatherData.url}
+          cityAttr={weatherData.city}
+          descriptionAttr={weatherData.description}
+          humidityAttr={weatherData.humidity}
+          windAttr={weatherData.wind}
+          tempAttr={weatherData.temp}
+          iconCodeAttr={weatherData.iconCode}
+          dateStrAttr={weatherData.dateStr}
         />
         <Github />
       </div>{" "}
