@@ -4,6 +4,7 @@ import Search from "./Search";
 import Current from "./Current";
 import Github from "./Github";
 import axios from "axios";
+import DateFunc from "./Date";
 
 export default function App() {
   let [url, setUrl] = useState(null);
@@ -26,36 +27,9 @@ export default function App() {
       setIiconCode(
         `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
       );
-      setDateFunc();
+      setDateStr(<DateFunc dateVal={response.data.dt} />);
     });
   };
-
-  function setDateFunc() {
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-
-    let localDate = new Date();
-    let month = months[localDate.getMonth()];
-    let date = localDate.getDate();
-    let day = days[localDate.getDay()];
-    let hour = `0${localDate.getHours()}`.slice(-2);
-    let min = `0${localDate.getMinutes()}`.slice(-2);
-    let dateString = `${month} ${date}, ${day} ${hour}:${min}`;
-    setDateStr(dateString);
-  }
 
   return (
     <div className="App mt-5">
