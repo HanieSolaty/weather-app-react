@@ -6,6 +6,7 @@ import Github from "./Github";
 import axios from "axios";
 import DateFunc from "./Date";
 import { ThreeDots } from "react-loader-spinner";
+import Forecast from "./Forecast";
 
 export default function App() {
   let [weatherData, setWeatherData] = useState({ ready: false });
@@ -20,9 +21,11 @@ export default function App() {
         humidity: Math.round(response.data.main.humidity),
         wind: Math.round(response.data.wind.speed),
         temp: Math.round(response.data.main.temp),
-        /*         iconCode: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-         */ iconCode: response.data.weather[0].icon,
+        // iconCode: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+        iconCode: response.data.weather[0].icon,
         dateStr: <DateFunc dateVal={response.data.dt} />,
+        lat: response.data.coord.lat,
+        lon: response.data.coord.lon,
       });
     });
   };
@@ -41,6 +44,11 @@ export default function App() {
             tempAttr={weatherData.temp}
             iconCodeAttr={weatherData.iconCode}
             dateStrAttr={weatherData.dateStr}
+          />
+          <Forecast
+            latAttr={weatherData.lat}
+            lonAttr={weatherData.lon}
+            urlAttr={weatherData.url}
           />
           <Github />
         </div>{" "}

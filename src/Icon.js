@@ -23,11 +23,13 @@ export default function Icon(props) {
     "11n": "WIND",
   };
   return (
-    <ReactAnimatedWeather
-      icon={iconCodeObj[props.iconCode]}
-      color={"#0b5ed7"}
-      size={64}
-      animate={true}
-    />
+    <div>
+      <ReactAnimatedWeather
+        icon={iconCodeObj[props.iconCode]}
+        color={"#0b5ed7"}
+        size={props.iconSize}
+        animate={true}
+      />
+    </div>
   );
 }

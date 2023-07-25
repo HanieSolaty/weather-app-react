@@ -10,6 +10,7 @@ export default function Current(props) {
   let [tempVal, setTempVal] = useState(null);
   let [iconCodeVal, setIiconCodeVal] = useState(null);
   let [dateStrVal, setDateStrVal] = useState(null);
+  let [ready, setReady] = useState(false);
 
   function setDate() {
     setDateStrVal(props.dateStrAttr);
@@ -25,44 +26,54 @@ export default function Current(props) {
   }
 
   useEffect(() => {
+    setReady(false);
     setDate();
     setWeatherAtrr();
+    setReady(true);
   }, [props.urlAttr]);
 
-  return (
-    <div className="row pb-4">
-      <div className="col-6">
-        <div className="row">
-          <h1 id="city">{cityVal}</h1>
+  if (ready) {
+    return (
+      <div className="row pb-4">
+        <div className="col-6">
+          <div className="row">
+            <h1 id="city">{cityVal}</h1>
+          </div>
+          <div className="row">
+            <p className="mb-0" id="description">
+              {descriptionVal}
+            </p>
+          </div>
+          <div className="row">
+            <p className="mb-0" id="date">
+              {dateStrVal}
+            </p>
+          </div>
+          <div className="row">
+            <p className="mb-0">
+              Humidity:
+              <span className="weather-param">
+                <span id="humidity"> {humidityVal}</span>%
+              </span>
+              , Wind:
+              <span className="weather-param">
+                <span id="wind"> {windVal}</span>
+                km/h
+              </span>
+            </p>
+          </div>
         </div>
-        <div className="row">
-          <p className="mb-0" id="description">
-            {descriptionVal}
-          </p>
-        </div>
-        <div className="row">
-          <p className="mb-0" id="date">
-            {dateStrVal}
-          </p>
-        </div>
-        <div className="row">
-          <p className="mb-0">
-            Humidity:
-            <span className="weather-param">
-              <span id="humidity"> {humidityVal}</span>%
-            </span>
-            , Wind:
-            <span className="weather-param">
-              <span id="wind"> {windVal}</span>
-              km/h
-            </span>
-          </p>
+        <div className="offset-2 col-4 align-self-center pt-2">
+          <Icon
+            iconCode={iconCodeVal}
+            iconSize={70}
+            className="main-temp-icon"
+          />
+          <Convert tempValue={tempVal} />
         </div>
       </div>
-      <div className="offset-2 col-4 align-self-center pt-2">
-        <Icon iconCode={iconCodeVal} className="main-temp-icon" />
-        <Convert tempValue={tempVal} />
-      </div>
-    </div>
-  );
+    );
+  } else {
+    return;
+  }
 }
